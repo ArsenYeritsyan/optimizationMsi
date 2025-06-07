@@ -110,6 +110,65 @@ Location: `/etc/fstab`
 /swapfile none swap sw 0 0
 ```
 
+## Known Issues and Troubleshooting
+
+### RAM Performance Issues
+
+#### Symptoms
+- IBECC memory errors reported by EDAC system
+- Potential memory stability issues
+- Memory running at 5600 MT/s with DDR5 modules
+
+#### Current Configuration
+- Total RAM: 64GB (2x 32GB DDR5)
+- Memory Type: DDR5 SODIMM
+- Speed: 5600 MT/s
+- Manufacturer: Wilk Elektronik S.A.
+- Part Number: GR5600S564L46/32G
+
+#### Troubleshooting Steps
+
+1. **BIOS Updates**
+   - Check for latest BIOS update from MSI
+   - BIOS updates often include memory controller improvements
+   - Update through MSI Center or BIOS flash
+
+2. **Memory Timing Adjustments**
+   - Access BIOS settings (F2 during boot)
+   - Try running memory at 5200 MT/s for better stability
+   - Enable XMP/DOCP profile if available
+   - Run Memory Training if option available
+
+3. **System Stability**
+   - Monitor system temperatures
+   - Run Memtest86+ for hardware verification
+   - Check for physical memory module seating
+
+4. **Performance Monitoring**
+   - Use `monitor_ram.sh` script to check:
+     - Memory bandwidth
+     - Latency
+     - Error rates
+     - Usage patterns
+
+#### Memory Error Logging
+```bash
+# Check for memory errors
+sudo dmesg | grep -i memory
+
+# View detailed memory information
+sudo dmidecode -t memory
+
+# Monitor memory pressure
+cat /proc/pressure/memory
+```
+
+#### Recommended Settings
+- Memory Frequency: 5200-5600 MT/s
+- Voltage: 1.1V
+- Error Correction: Enabled
+- Memory Training: Enabled
+
 ## Contributing
 
 1. Fork the repository
